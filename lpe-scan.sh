@@ -1,139 +1,139 @@
 #!/bin/bash
 
-# Check for world-writable directories
+# Vérification des reportoires world-writable
 echo -e "\033[1;34m-----------------------------------------------------"
-echo -e "Checking for world-writable directories..."
+echo -e "Recherche de répertoires en écriture mondiale world-writable ..."
 echo -e "-----------------------------------------------------\033[0m"
-echo "World-writable directories are directories that can be written to by any user on the system. This can be a security risk if sensitive files are stored in these directories."
+echo "Les répertoires world-writable sont des répertoires qui peuvent être écrits par n’importe quel utilisateur sur le système. Cela peut être un risque de sécurité si des fichiers sensibles sont stockés dans ces répertoires."
 find / -type d -perm -2 ! -path "/sys*" -exec ls -ld {} \; 2>/dev/null
 echo -e "\033[1;34m-----------------------------------------------------\033[0m"
 
-# Check for SUID executables
+# Vérification des SUID exécutables
 echo -e "\033[1;34m-----------------------------------------------------"
-echo -e "Checking for SUID executables..."
+echo -e "Vérification des SUID exécutables..."
 echo -e "-----------------------------------------------------\033[0m"
-echo "SUID (Set User ID) is a permission that allows a user to execute a file with the permissions of the file's owner."
-echo "This can be a security risk if the file is owned by root or if it is a program that allows users to execute arbitrary commands."
+echo "SUID (Set User ID) est une permission qui permet à un utilisateur d’exécuter un fichier avec les autorisations du propriétaire du fichier."
+echo "Cela peut être un risque de sécurité si le fichier appartient à root ou s’il s’agit d’un programme qui permet aux utilisateurs d’exécuter des commandes arbitraires."
 find / -type f -perm -4000 -exec ls -ld {} \; 2>/dev/null
 echo -e "\033[1;34m-----------------------------------------------------\033[0m"
 
-# Check for SGID executables
+# Vérification des SGID exécutables
 echo -e "\033[1;34m-----------------------------------------------------"
 echo -e "Checking for SGID executables..."
 echo -e "-----------------------------------------------------\033[0m"
-echo "SGID (Set Group ID) is a permission that allows a user to execute a file with the permissions of the file's group."
-echo "This can be a security risk if the file is owned by a group with excessive permissions or if it is a program that allows users to execute arbitrary commands."
+echo "SGID (Set Group ID) est une permission qui permet à un utilisateur d’exécuter un fichier avec les autorisations du groupe du fichier."
+echo "Cela peut être un risque de sécurité si le fichier est détenu par un groupe avec des permissions excessives ou si c’est un programme qui permet aux utilisateurs d’exécuter la commande arbitraire."
 find / -type f -perm -2000 -exec ls -ld {} \; 2>/dev/null
 echo -e "\033[1;34m-----------------------------------------------------\033[0m"
 
-# Check for unauthorized SUID/SGID files
+# Vérification des fichiers SUID/SGID non autorisés
 echo -e "\033[1;34m-----------------------------------------------------"
-echo -e "Checking for unauthorized SUID/SGID files..."
+echo -e "Vérification des fichiers SUID/SGID non autorisés..."
 echo -e "-----------------------------------------------------\033[0m"
-echo "SUID/SGID permissions should only be set on trusted executables. If they are set on an untrusted or unknown file, it may indicate a security risk."
+echo "Les permissions SUID/SGID ne doivent être définies que sur les exécutables de confiance. Si elles sont définies sur un fichier non fiable ou inconnu, cela peut indiquer un risque de sécurité."
 find / -perm /6000 -exec ls -ld {} \; 2>/dev/null
 echo -e "\033[1;34m-----------------------------------------------------\033[0m"
 
-# Check for .bash_history files
+# Vérification des fichiers . bash_history
 echo -e "\033[1;34m-----------------------------------------------------"
-echo -e "Checking for .bash_history files..."
+echo -e "Vérification des fichiers . bash_history..."
 echo -e "-----------------------------------------------------\033[0m"
-echo ".bash_history files contain a record of all the commands that have been entered into the bash shell. These files should be protected to prevent unauthorized access to potentially sensitive information."
+echo "le fichier .bash_history les fichiers contiennent un enregistrement de toutes les commandes entrées dans le shell bash. Ces fichiers devraient être protégés pour empêcher l’accès non autorisé à des renseignements potentiellement sensibles."
 find / -name .bash_history -exec ls -ld {} \; 2>/dev
 
-# Check for .ssh directory
+# Vérification des fichiers .ssh 
 echo -e "\033[1;34m-----------------------------------------------------"
-echo -e "Checking for .ssh directory..."
+echo -e "Vérification des fichiers .ssh..."
 echo -e "-----------------------------------------------------\033[0m"
-echo ".ssh directories contain files related to secure shell (SSH) access to the system. These files should be protected to prevent unauthorized access."
+echo "Les fichiers .ssh contiennent des fichiers liés à l’accès sécurisé au système par Shell (SSH). Ces fichiers doivent être protégés pour empêcher tout accès non autorisé."
 find / -name .ssh -exec ls -ld {} \; 2>/dev/null
 echo -e "\033[1;34m-----------------------------------------------------\033[0m"
 
-# Check for known hosts file
+# Vérification des known hosts file
 echo -e "\033[1;34m-----------------------------------------------------"
-echo -e "Checking for known_hosts file..."
+echo -e "Vérification des known hosts file..."
 echo -e "-----------------------------------------------------\033[0m"
-echo "The known_hosts file contains a list of all the SSH servers that the system has connected to in the past. It is used to prevent man-in-the-middle attacks."
+echo "Le fichier known_hosts contient une liste de tous les serveurs SSH auxquels le système s’est connecté dans le passé. Il est utilisé pour prévenir les attaques."
 find / -name known_hosts -exec ls -ld {} \; 2>/dev/null
 echo -e "\033[1;34m-----------------------------------------------------\033[0m"
 
-# Check for authorized_keys file
+# Vérification des fichiers authorized_keys
 echo -e "\033[1;34m-----------------------------------------------------"
-echo -e "Checking for authorized_keys file..."
+echo -e "Vérification des fichiers authorized_keys..."
 echo -e "-----------------------------------------------------\033[0m"
-echo "The authorized_keys file contains a list of public keys that are authorized to access the system via SSH. It should be protected to prevent unauthorized access."
+echo "Les fichiers authorized_keys contient une liste des clés publiques qui sont autorisées à accéder au système par SSH. Il devrait être protégé pour empêcher l’accès non autorisé."
 find / -name authorized_keys -exec ls -ld {} \; 2>/dev/null
 echo -e "\033[1;34m-----------------------------------------------------\033[0m"
 
-# Check for password files
+# Vérifier les password files
 echo -e "\033[1;34m-----------------------------------------------------"
-echo -e "Checking for password files..."
+echo -e "Vérifier les password files..."
 echo -e "-----------------------------------------------------\033[0m"
-echo "Password files, such as /etc/shadow, contain encrypted passwords for all users on the system. These files should be protected to prevent unauthorized access and password cracking."
+echo "Password files, comme /etc/shadow, contiennent des mots de passe chiffrés pour tous les utilisateurs du système. Ces fichiers doivent être protégés pour empêcher l’accès non autorisé et le craquage de mots de passe."
 find / -name "*shadow*" -exec ls -ld {} \; 2>/dev/null
 echo -e "\033[1;34m-----------------------------------------------------\033[0m"
 
-# Check for ssh configuration files
+# Vérification des fichiers de configuration ssh configuration
 echo -e "\033[1;34m-----------------------------------------------------"
-echo -e "Checking for ssh configuration files..."
+echo -e "Vérification des fichiers de configuration ssh configuration..."
 echo -e "-----------------------------------------------------\033[0m"
-echo "SSH configuration files, such as /etc/ssh/sshd_config, contain settings for the SSH server. These files should be configured securely to prevent unauthorized access."
+echo "Le fichier de configuration SSH, tel que/etc/ssh/sshd_config, contient les paramètres du serveur SSH. Ces fichiers doivent être configurés de manière sécurisée pour empêcher tout accès non autorisé."
 find / -name "sshd_config" -exec ls -ld {} \; 2>/dev/null
 echo -e "\033[1;34m-----------------------------------------------------\033[0m"
 
-# Check for open ports
+# Vérification des Ports ouverts
 echo -e "\033[1;34m-----------------------------------------------------"
-echo -e "Checking for open ports..."
+echo -e "Vérification des Ports ouverts..."
 echo -e "-----------------------------------------------------\033[0m"
-echo "Open ports are network ports that have an active listening service. These ports should be secured to prevent unauthorized access."
+echo "Les ports ouverts sont des ports réseau qui ont un service d’écoute actif. Ces ports devraient être sécurisés pour empêcher l’accès non autorisé."
 netstat -tulpn
 echo -e "\033[1;34m-----------------------------------------------------\033[0m"
 
-# Check for kernel modules
+# Vérification des kernel modules
 echo -e "\033[1;34m-----------------------------------------------------"
-echo -e "Checking for kernel modules..."
+echo -e "Vérification des kernel modules..."
 echo -e "-----------------------------------------------------\033[0m"
-echo "Kernel modules are pieces of code that can be loaded into the kernel at runtime to extend the kernel's functionality. These modules should be monitored to prevent the loading of malicious or unauthorized modules."
+echo "Les Kernel modules sont des morceaux de code qui peuvent être chargés dans le noyau à l’exécution pour étendre les fonctionnalités du noyau. Ces modules devraient être surveillés pour empêcher le chargement de modules malveillants ou non autorisés.."
 lsmod
 echo -e "\033[1;34m-----------------------------------------------------\033[0m"
 
-# Check for cron jobs
+# Vérification des cron jobs
 echo -e "\033[1;34m-----------------------------------------------------"
-echo -e "Checking for cron jobs..."
+echo -e "Vérification des cron jobs..."
 echo -e "-----------------------------------------------------\033[0m"
-echo "Cron is a daemon that runs scheduled tasks. These tasks, called cron jobs, should be monitored to prevent the execution of malicious or unauthorized tasks."
+echo "Cron est un daemon qui exécute des tâches planifiées. Ces tâches, appelées tâches cron, doivent être surveillées pour empêcher l’exécution de tâches malveillantes ou non autorisées."
 crontab -l
 echo -e "\033[1;34m-----------------------------------------------------\033[0m"
 
-# Check for logged in users
+# Vérification des users logged
 echo -e "\033[1;34m-----------------------------------------------------"
-echo -e "Checking for logged in users..."
+echo -e "Vérification des users logged..."
 echo -e "-----------------------------------------------------\033[0m"
-echo "Logged in users may have access to sensitive system resources. It is important to monitor and control access to these resources."
+echo "Les utilisateurs connectés peuvent avoir accès à des ressources système sensibles. Il est important de surveiller et de contrôler l’accès à ces ressources."
 who
 echo -e "\033[1;34m-----------------------------------------------------\033[0m"
 
-# Check for running processes
+# Vérification des running processes
 echo -e "\033[1;34m-----------------------------------------------------"
-echo -e "Checking for running processes..."
+echo -e "Vérification des running processes..."
 echo -e "-----------------------------------------------------\033[0m"
-echo "Running processes may be using system resources or have the ability to access sensitive data. It is important to monitor and control these processes."
+echo "Les processus en cours peuvent utiliser les ressources du système ou avoir la capacité d’accéder à des données sensibles. Il est important de surveiller et de contrôler ces processus."
 ps aux
 echo -e "\033[1;34m-----------------------------------------------------\033[0m"
 
-# Check for listening processes
+# Vérification des process en écoute 
 echo -e "\033[1;34m-----------------------------------------------------"
-echo -e "Checking for listening processes..."
+echo -e "Vérification des process en écoute..."
 echo -e "-----------------------------------------------------\033[0m"
-echo "Listening processes are processes that are waiting for incoming connections. These processes should be monitored to prevent unauthorized access."
+echo "Les processus d’écoute sont des processus en attente de connexions entrantes. Ces processus devraient être surveillés pour empêcher l’accès non autorisé."
 lsof -i -P -n
 echo -e "\033[1;34m-----------------------------------------------------\033[0m"
 
-# Check for open file descriptors
+# Vérification des file descriptors ouverts
 echo -e "\033[1;34m-----------------------------------------------------"
-echo -e "Checking for open file descriptors..."
+echo -e "Vérification des file descriptors ouverts..."
 echo -e "-----------------------------------------------------\033[0m"
-echo "File descriptors are references to open files. They can be used to access sensitive data or to manipulate system resources. It is important to monitor and control access to these descriptors."
+echo "File descriptors sont des références à des fichiers ouverts. Ils peuvent être utilisés pour accéder à des données sensibles ou pour manipuler les ressources du système. Il est important de surveiller et de contrôler l’accès à ces descripteurs."
 lsof -nP +c 15
 echo -e "\033[1;34m-----------------------------------------------------\033[0m"
 
