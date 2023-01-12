@@ -23,10 +23,10 @@ processus d'écoute
 descripteurs de fichiers
 
 
-Comment l'exécuter
+- Comment l'exécuter
 
-chmod +x lpe-scan.sh
-./lpe-scan.sh
+#chmod +x lpe-scan.sh
+#./lpe-scan.sh
 
-#Sauvegarder le resultat dans le fichier txt
-./lpe-scan.sh > scan-results.txt
+- Sauvegarder le resultat dans le fichier txt
+#./lpe-scan.sh > scan-results.txt
