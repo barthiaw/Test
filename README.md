@@ -26,6 +26,7 @@ descripteurs de fichiers
 - Comment l'exécuter
 
 #chmod +x lpe-scan.sh
+
 #./lpe-scan.sh
 
 - Sauvegarder le resultat dans le fichier txt
