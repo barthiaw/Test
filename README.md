@@ -29,4 +29,5 @@ descripteurs de fichiers
 #./lpe-scan.sh
 
 - Sauvegarder le resultat dans le fichier txt
+
 #./lpe-scan.sh > scan-results.txt
