@@ -21,3 +21,12 @@ utilisateurs connectés
 processus en cours d'exécution
 processus d'écoute
 descripteurs de fichiers
+
+
+Comment l'exécuter
+
+chmod +x lpe-scan.sh
+./lpe-scan.sh
+
+#Sauvegarder le resultat dans le fichier txt
+./lpe-scan.sh > scan-results.txt
